@@ -25,7 +25,7 @@
 <!-- SOOM 공식 사이트 첫 화면(상호 SOOM).
      바깥 요청·쿠키·방문 분석·광고 도구 없음(위 Content-Security-Policy가 이 사이트 밖으로 나가는 요청을 막는다). 글꼴은 이 사이트에 둔 Pretendard(SIL OFL, fonts/OFL.txt).
      글을 고치면 공개 전에 tools/site_fonts.py를 다시 돌린다(새 글자가 글꼴에 들어가도록).
-     맨 아래 <script>를 한 글자라도 고치면 위 script-src의 sha256 값을 다시 계산해 바꾼다(안 바꾸면 스크립트가 막혀 움직임만 빠지고 내용은 그대로 보인다).
+     맨 아래 스크립트를 한 글자라도 고치면 위 script-src의 sha256 값을 다시 계산해 바꾼다(안 바꾸면 스크립트가 막혀 움직임만 빠지고 내용은 그대로 보인다).
      베타 설문 링크를 받으면: data-survey가 붙은 두 곳(첫 화면 단추, 베타 칸 단추)을 설문 링크 <a>로 바꾸고 글을 '베타 신청하기'로. -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"SOOM","url":"https://soomrun.com/","logo":"https://soomrun.com/img/icon-180.png","email":"contact@soomrun.com","sameAs":["https://www.youtube.com/@SOOMRUN","https://www.instagram.com/soom.42195/","https://www.threads.com/@soom.42195","https://x.com/SOOM_42195","https://www.tiktok.com/@soom.run"]}
@@ -196,22 +196,14 @@ h2{font-weight:900;font-size:clamp(30px,5.4vw,60px);line-height:1.15;letter-spac
 .faq details[open] summary::after{transform:rotate(45deg)}
 .faq details p{margin:0 0 24px;color:var(--muted);max-width:46em}
 
-/* 07 운영 정보 */
-.about{display:grid;gap:14px;margin-top:40px}
-.box{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:26px 24px}
-.box h3{font-weight:900;font-size:19px;margin:0}
-.box dl{display:grid;grid-template-columns:auto 1fr;gap:10px 20px;margin:18px 0 0}
-.box dt{color:var(--muted);font-size:14px;padding-top:2px}
-.box dd{margin:0;font-weight:700}
-.box p{color:var(--muted);margin:14px 0 0}
-.box .links{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:16px;font-weight:700}
-
 /* 아래 */
 footer{border-top:1px solid var(--line);padding:36px 0 56px;font-size:14px;color:var(--muted)}
 footer nav{display:flex;flex-wrap:wrap;gap:8px 20px;margin-bottom:14px}
 footer nav a{color:var(--ink);text-decoration:none;font-weight:700}
 footer p{margin:6px 0}
 .copy{margin-top:18px;font-weight:700;color:var(--ink)}
+.org{margin-top:18px!important}.org a{color:inherit}
+.en{font-size:12.5px;line-height:1.6;max-width:62em;opacity:.85}
 
 /* 움직임: 스크롤하면 떠오름(자바스크립트가 있을 때만 숨김) */
 .js .rv{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
@@ -230,7 +222,6 @@ footer p{margin:6px 0}
 @media (min-width:700px){
   .bento{grid-template-columns:1fr 1fr}
   .tile.wide,.tile.cal{grid-column:span 2}
-  .about{grid-template-columns:1fr 1fr}
   .pair{grid-template-columns:1fr 1fr}
   .pair .after{border-top:0;border-left:1px dashed var(--line)}
   .cta{flex-direction:row;justify-content:center;gap:18px}
@@ -336,11 +327,11 @@ footer p{margin:6px 0}
       <ol class="steps">
         <li class="step on"><p class="when">01 · 달리기 전</p><h3>러닝 날씨와 복장</h3><p>달리기 좋은 시간과 그 시간에 맞는 복장을 알려 줘요.</p><p class="src">날씨 자료: 기상청, 한국환경공단 에어코리아</p>
           <div class="shot"><div><img src="img/s-outfit.jpg" width="600" height="1304" loading="lazy" alt="러닝 날씨 화면. 시간별 예보와 오전 6시에 맞춘 복장 추천, 이번 주 추천 훈련."></div></div></li>
-        <li class="step"><p class="when">02 · 달린 뒤</p><h3>코치 메모와 같은 코스</h3><p>숫자를 말로 풀어 주고, 같은 코스는 알아서 묶어 지난번과 비교해요.</p>
+        <li class="step"><p class="when">02 · 달린 뒤</p><h3>코치 메모와 같은 코스</h3><p>어려운 용어와 숫자를 이해하기 쉽게 풀어 설명해 주고, 같은 코스는 알아서 묶어 지난번과 비교해요.</p>
           <div class="shot"><div><img src="img/s-run.jpg" width="600" height="1304" loading="lazy" alt="러닝 기록 화면. 코치 메모와 같은 코스 비교."></div></div></li>
-        <li class="step"><p class="when">03 · 다음 날</p><h3>회복과 컨디션</h3><p>회복 시간은 지난 운동의 강도로, 컨디션은 HRV, 안정 심박, 수면으로 어림해요.</p>
+        <li class="step"><p class="when">03 · 다음 날</p><h3>회복과 컨디션</h3><p>회복 시간은 지난 운동의 강도로, 컨디션은 HRV, 안정 심박, 수면으로 판단해 줘요.</p>
           <div class="shot"><div><img src="img/s-recovery.jpg" width="600" height="1304" loading="lazy" alt="회복 화면. 회복 시간 0시간, 컨디션 99점, 최근 30일 컨디션 그래프."></div></div></li>
-        <li class="step"><p class="when">04 · 이번 주</p><h3>대회가 없어도, 내 목표에 맞춘 계획</h3><p>목표 거리만 넣어도 이번 주 추천 계획과 월간 계획표가 나와요.</p>
+        <li class="step"><p class="when">04 · 이번 주</p><h3>내 상태와 목표에 맞춘 계획</h3><p>목표 거리만 넣어도 이번 주 추천 계획과 월간 계획표가 나와요.</p>
           <div class="shot"><div><img src="img/s-plan.jpg" width="600" height="1304" loading="lazy" alt="훈련 화면. 훈련 상태, 이번 주 추천 훈련 계획, 월간 계획표."></div></div></li>
         <li class="step"><p class="when">05 · 한 달 뒤</p><h3>쌓인 기록의 흐름</h3><p>러닝 VO2max 추이, 레이스 예측, 개인 기록을 모아 봐요.</p>
           <div class="shot"><div><img src="img/s-records.jpg" width="600" height="1304" loading="lazy" alt="성장 화면. 400m부터 15km까지 개인 기록과 거리별 실력 균형."></div></div></li>
@@ -376,10 +367,10 @@ footer p{margin:6px 0}
     <p class="sub rv">건강 기록은 건강 앱에, 분석은 내 iPhone 안에서 해요.</p>
     <div class="rows">
       <div class="row rv"><span class="n">01</span><strong>수집하지 않아요</strong><p>SOOM 앱은 이용자의 건강 기록과 개인정보를 가져가지 않아요. 회원가입도, 이용자 정보를 저장하는 서버도 없어요.</p></div>
-      <div class="row rv"><span class="n">02</span><strong>활용할 수 없어요</strong><p>앱에 있는 건강 기록과 개인정보를 가져가지 않으니 개발자가 보거나, 분석하거나, 팔 수 없어요. 광고, 이용 분석, 추적 도구도 없어요.</p></div>
-      <div class="row rv"><span class="n">03</span><strong>건강 기록이 한꺼번에 샐 곳이 없어요</strong><p>개발자 쪽에 건강 기록을 모아 둔 곳이 없어서, 해킹으로 한꺼번에 새어 나갈 건강 기록도 없어요. 직접 보낸 문의 메일만 개발자 메일함에 남아요(정식 출시 전 베타 기간 예외는 아래 참고).</p></div>
+      <div class="row rv"><span class="n">02</span><strong>활용할 수 없어요</strong><p>앱에 있는 건강 기록과 개인정보를 가져가지 않으니 SOOM이 보거나, 분석하거나, 팔 수 없어요. 광고, 이용 분석, 추적 도구도 없어요.</p></div>
+      <div class="row rv"><span class="n">03</span><strong>건강 기록이 한꺼번에 샐 곳이 없어요</strong><p>SOOM 쪽에 건강 기록을 모아 둔 곳이 없어서, 해킹으로 한꺼번에 새어 나갈 건강 기록도 없어요. 직접 보낸 문의 메일만 SOOM 메일함에 남아요(정식 출시 전 베타 기간 예외는 아래 참고).</p></div>
     </div>
-    <p class="fine">날씨를 켜면 지난 러닝의 달이나 시각이 날씨 중계기로(위치는 보내지 않아요), 동네 이름을 찾을 약 100m 단위 위치가 Apple로, 지도를 보면 지도 지역이 전달돼요. 심박, 수면, 경로 같은 건강 기록은 보내지 않아요. iCloud 백업을 켜 두면 신발, 계획표 같은 일반 자료는 백업에 포함돼요. 직접 보낸 문의 메일만 개발자 메일함에 남아요. 베타 기간에는 예외로, 신청 이메일 목록이 개발자의 Google 설문지·Gmail에 있고(늦어도 베타가 끝나고 7일 안에 지워요), 직접 보낸 설문 답·피드백과 TestFlight가 자동으로 보내는 충돌·사용 기록도 개발자에게 와요.</p>
+    <p class="fine">날씨를 켜면 지난 러닝의 달이나 시각이 날씨 중계기로(위치는 보내지 않아요), 동네 이름을 찾을 약 100m 단위 위치가 Apple로, 지도를 보면 지도 지역이 전달돼요. 심박, 수면, 경로 같은 건강 기록은 보내지 않아요. iCloud 백업을 켜 두면 신발, 계획표 같은 일반 자료는 백업에 포함돼요. 직접 보낸 문의 메일만 SOOM 메일함에 남아요. 베타 기간에는 예외로, 신청 이메일 목록이 SOOM의 Google 설문지·Gmail에 있고(늦어도 베타가 끝나고 7일 안에 지워요), 직접 보낸 설문 답·피드백과 TestFlight가 자동으로 보내는 충돌·사용 기록도 SOOM에 와요.</p>
     <a class="more" href="privacy.html">개인정보처리방침 전문 보기 <span aria-hidden="true">→</span></a>
   </div>
 </section>
@@ -435,7 +426,7 @@ footer p{margin:6px 0}
     <div class="faq">
       <details><summary>언제 출시해요?</summary><p>정식 출시 날짜는 아직 정하지 않았어요. 먼저 베타 테스트로 다듬고, 날짜가 정해지면 SOOM 공식 SNS와 이 페이지에 알려요.</p></details>
       <details><summary>가격은 얼마예요?</summary><p>내려받기는 무료예요. 무료 체험으로 모든 기능을 먼저 써 보고, 마음에 들면 한 번 결제해서 계속 쓰는 평생 이용권(구독이 아니에요)을 준비하고 있어요. 사지 않아도 기록 목록, 기본 수치, 자료 내보내기는 계속 쓸 수 있어요. 가격은 정식 출시 때 알려요.</p></details>
-      <details><summary>무엇이 있어야 쓸 수 있어요?</summary><p>iOS 17 이상 iPhone이 필요해요. SOOM은 건강 앱에 저장된 러닝 기록을 읽어서, Apple Watch로 달린 기록이 있으면 가장 자세하게 분석하고 없으면 볼 수 있는 분석 항목이 줄어요. Android 휴대폰은 지원하지 않아요.</p></details>
+      <details><summary>무엇이 있어야 쓸 수 있어요?</summary><p>iOS 17 이상 iPhone이 필요해요. SOOM은 건강 앱에 저장된 러닝 기록을 읽어서, Apple Watch로 달린 기록이 있으면 가장 자세하게 분석하고 없으면 볼 수 있는 분석 항목이 줄어요. 아직은 Android 휴대폰을 지원하지 않아요.</p></details>
       <details><summary>회원가입이나 로그인이 필요해요?</summary><p>아니요. 회원가입도 로그인도 없어요. 앱을 열고 건강 앱 읽기를 허용하면 바로 시작해요. 허용하기 전에 예시 기록으로 먼저 둘러볼 수도 있어요.</p></details>
       <details><summary>휴대폰을 바꾸면 기록은 어떻게 돼요?</summary><p>러닝 기록 원본은 건강 앱에 있어서, 건강 앱 기록이 새 iPhone으로 옮겨지면 SOOM이 다시 읽어요. 신발, 계획표, 설정은 iCloud나 컴퓨터 백업을 켜 두면 백업에 같이 들어가요. 메모, 프로필 값, 트레드밀 거리는 설정 › 데이터 › 내 자료 옮기기에서 내가 정한 암호를 건 파일로 옮겨요.</p></details>
       <details><summary>SOOM의 숫자는 얼마나 정확해요?</summary><p>SOOM의 수치는 공개된 연구를 바탕으로 훈련에 참고하는 추정치예요. SOOM은 의료기기가 아니며 병을 찾아내거나 진단하지 않아요.</p></details>
@@ -444,31 +435,6 @@ footer p{margin:6px 0}
   </div>
 </section>
 
-<section id="about" aria-labelledby="h-about" style="padding-top:0">
-  <div class="wrap">
-    <p class="label rv"><b>07</b>운영 정보</p>
-    <h2 id="h-about" class="rv">SOOM 운영 정보</h2>
-    <div class="about">
-      <div class="box rv">
-        <h3>운영</h3>
-        <dl>
-          <dt>상호</dt><dd>SOOM</dd>
-          <dt>서비스</dt><dd>러닝 기록 분석 iPhone 앱 SOOM</dd>
-          <dt>문의</dt><dd><a href="mailto:contact@soomrun.com">contact@soomrun.com</a></dd>
-          <dt>웹사이트</dt><dd>soomrun.com</dd>
-          <!-- 사업자등록 뒤 채움(정식 판매 전 필수, 전자상거래법 제13조 제1항): 대표자, 사업자등록번호, 사업장 주소, 전화번호, 통신판매업 신고번호, 사업자정보 확인 링크 -->
-        </dl>
-        <p class="links"><a href="support.html">지원</a><a href="privacy.html">개인정보처리방침</a></p>
-      </div>
-      <div class="box rv" lang="en">
-        <h3>About SOOM</h3>
-        <p>SOOM is a running analytics app for iPhone. It reads the runs you record with Apple Watch from the Health app and analyzes them on your iPhone: weather for your run, coach notes, recovery and daily condition, a training plan, and long-term progress. No sign-up, no ads, no tracking.</p>
-        <p>SOOM is preparing for a beta test in the Republic of Korea (applications open November 16, 2026) and is not yet available on the App Store.</p>
-        <p class="links"><a href="mailto:contact@soomrun.com">contact@soomrun.com</a><a href="privacy.html">Privacy Policy (Korean)</a><a href="support.html">Support (Korean)</a></p>
-      </div>
-    </div>
-  </div>
-</section>
 </main>
 
 <footer>
@@ -479,6 +445,9 @@ footer p{margin:6px 0}
     <p>SOOM의 수치는 공개된 연구를 바탕으로 한 추정치예요.</p>
     <p>이 사이트는 쿠키와 방문 분석 도구를 쓰지 않아요.</p>
     <p>Apple, Apple Watch, iPhone, iCloud, App Store, TestFlight는 Apple Inc.의 상표예요. SOOM은 Apple이 만들거나 보증한 앱이 아니에요.</p>
+    <p class="org">상호 SOOM · 러닝 기록 분석 iPhone 앱 SOOM · 문의 <a href="mailto:contact@soomrun.com">contact@soomrun.com</a></p>
+    <!-- 사업자등록 뒤 이 줄 아래에 채움(정식 판매 전 필수, 전자상거래법 제13조 제1항): 대표자, 사업자등록번호, 사업장 주소, 전화번호, 통신판매업 신고번호, 사업자정보 확인 링크 -->
+    <p class="en" lang="en">About SOOM: SOOM is a running analytics app for iPhone. It reads the runs you record with Apple Watch from the Health app and analyzes them on your iPhone: weather for your run, coach notes, recovery and daily condition, a training plan, and long-term progress. No sign-up, no ads, no tracking. SOOM is preparing for a beta test in the Republic of Korea (applications open November 16, 2026) and is not yet available on the App Store. Contact: contact@soomrun.com</p>
     <p class="copy">© 2026 SOOM</p>
   </div>
 </footer>
