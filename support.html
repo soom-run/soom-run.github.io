@@ -3,32 +3,62 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'none'; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
 <title>SOOM 지원</title>
 <style>
-:root { --bg: #f6f2e9; --card: #fff; --ink: #1d1b18; --muted: #6f695f; --line: #e4ddcf; --accent: #c2541c; color-scheme: light dark; }
-@media (prefers-color-scheme: dark) { :root { --bg: #0d0d0e; --card: #1b1b1d; --ink: #f2f0ec; --muted: #a29d94; --line: #333336; --accent: #f0a23a; } }
-* { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; word-break: keep-all; }
-main { max-width: 720px; margin: 0 auto; padding: 32px 16px 64px; }
-h1 { font-size: 28px; line-height: 1.3; margin: 0 0 4px; }
-h2 { font-size: 19px; margin: 36px 0 8px; }
-p, ul { margin: 8px 0; }
-ul { padding-left: 20px; }
-a { color: var(--accent); }
-.date { color: var(--muted); font-size: 14px; }
-.box { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; margin: 16px 0; }
-.scroll { overflow-x: auto; }
-table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: 14px; }
-th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
-th { background: var(--card); }
-.promise { background: var(--card); background: color-mix(in srgb, var(--accent) 10%, var(--card)); border: 2px solid var(--accent); border-radius: 14px; padding: 18px 18px 14px; margin: 20px 0; }
-.promise h2 { font-size: 21px; line-height: 1.4; margin: 0 0 12px; }
-.promise p { margin: 10px 0; }
-.promise strong { display: block; }
-.promise .note { color: var(--muted); font-size: 14px; }
+/* SOOM 공식 사이트 공통 모양(첫 화면 index.html과 같은 색·글꼴·위 메뉴·아래 줄). 글 내용(main)은 바꾸지 않았다. */
+@font-face{font-family:P;src:url(fonts/pretendard-500.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:P;src:url(fonts/pretendard-700.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:P;src:url(fonts/pretendard-900.woff2) format("woff2");font-weight:900;font-display:swap}
+:root{color-scheme:light dark;--bg:#F6F2E8;--card:#FFFFFF;--line:#E0D8C8;--ink:#0B1B33;--muted:#5C6472;--accent:#0B7A70;--on-accent:#FFFFFF;--nav:rgba(246,242,232,.74)}
+@media (prefers-color-scheme:dark){:root{--bg:#000000;--card:#111214;--line:#2A2B30;--ink:#FFFFFF;--muted:#A6A6AD;--accent:#40D9C4;--on-accent:#03110F;--nav:rgba(12,12,13,.68)}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:500 16px/1.75 P,-apple-system,"Apple SD Gothic Neo",sans-serif;word-break:keep-all;overflow-wrap:anywhere;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+.nav{position:sticky;top:10px;z-index:40;padding:0 12px;margin-top:10px}
+.nav .bar{max-width:1160px;margin:0 auto;display:flex;align-items:center;gap:4px;padding:6px 6px 6px 16px;border-radius:999px;background:var(--nav);-webkit-backdrop-filter:blur(16px) saturate(1.6);backdrop-filter:blur(16px) saturate(1.6);border:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:9px;font-weight:900;letter-spacing:.14em;font-size:18px;color:var(--ink);text-decoration:none;margin-right:auto}
+.logo svg{width:40px;height:16px;flex:none}
+.nav .links{display:none}
+.nav .links a{padding:8px 13px;border-radius:999px;color:var(--ink);text-decoration:none;font-weight:700;font-size:14px}
+.nav .links a:hover,.nav .links a[aria-current]{background:color-mix(in srgb,var(--ink) 8%,transparent)}
+.pill{display:inline-flex;align-items:center;font-weight:700;font-size:14px;text-decoration:none;color:var(--on-accent);background:var(--accent);padding:9px 16px;border-radius:999px;white-space:nowrap}
+@media (min-width:720px){.nav .links{display:flex}}
+main{max-width:760px;margin:0 auto;padding:44px 20px 72px}
+h1{font-weight:900;font-size:clamp(30px,5.4vw,46px);line-height:1.2;letter-spacing:-.025em;margin:0 0 8px}
+h2{font-weight:900;font-size:21px;line-height:1.4;letter-spacing:-.01em;margin:44px 0 10px}
+p,ul{margin:10px 0}
+ul{padding-left:22px}
+li{margin:4px 0}
+strong{font-weight:700}
+.date{color:var(--muted);font-size:14px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px 20px;margin:18px 0}
+.box strong{font-weight:900}
+.scroll{overflow-x:auto;border-radius:14px;border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px;background:var(--card)}
+th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+tr:first-child th,tr:first-child td{border-top:0}th:first-child,td:first-child{border-left:0}th:last-child,td:last-child{border-right:0}tr:last-child th,tr:last-child td{border-bottom:0}
+th{background:color-mix(in srgb,var(--accent) 7%,var(--card));font-weight:700;width:8.5em}
+.promise{background:var(--card);background:color-mix(in srgb,var(--accent) 9%,var(--card));border:2px solid var(--accent);border-radius:22px;padding:22px 22px 16px;margin:24px 0}
+.promise h2{font-size:22px;line-height:1.4;margin:0 0 12px}
+.promise p{margin:12px 0}
+.promise strong{display:block;font-weight:900}
+.promise .note{color:var(--muted);font-size:14px}
+footer{border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+footer .in{max-width:760px;margin:0 auto;padding:32px 20px 52px}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 20px;margin-bottom:12px}
+footer nav a{color:var(--ink);text-decoration:none;font-weight:700}
+footer p{margin:6px 0}
 </style>
+<link rel="icon" href="img/icon-180.png">
+<link rel="apple-touch-icon" href="img/icon-180.png">
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="eg" x1="0" x2="1"><stop offset="0" stop-color="#E5483B"/><stop offset=".5" stop-color="#F2A91F"/><stop offset="1" stop-color="#2DAE5F"/></linearGradient></defs></svg>
+<header class="nav"><div class="bar"><a class="logo" href="./" aria-label="SOOM 처음으로"><svg viewBox="0 0 100 40" aria-hidden="true" overflow="visible"><path d="M8 30 C14 6,20 6,28 26 S40 34,48 16 S62 22,70 20 L92 18" fill="none" stroke="url(#eg)" stroke-width="6.5" stroke-linecap="round"/><circle cx="8" cy="30" r="5" fill="#fff" stroke="#E5483B" stroke-width="3"/><circle cx="92" cy="18" r="6" fill="#2DAE5F"/></svg>SOOM</a><nav class="links" aria-label="사이트"><a href="./">소개</a><a href="support.html" aria-current="page">지원</a><a href="privacy.html">개인정보처리방침</a></nav><a class="pill" href="./#beta">베타 신청</a></div></header>
 <main>
 <h1>SOOM 지원</h1>
 <p class="date">러닝 기록 분석 앱 SOOM의 문의 안내예요.</p>
@@ -93,5 +123,6 @@ th { background: var(--card); }
 <h2>개인정보</h2>
 <p><a href="privacy.html">개인정보처리방침</a>을 확인해 주세요.</p>
 </main>
+<footer><div class="in"><nav aria-label="사이트"><a href="./">소개</a><a href="support.html">지원</a><a href="privacy.html">개인정보처리방침</a><a href="mailto:contact@soomrun.com">문의 메일</a></nav><p>상호 SOOM · 문의 contact@soomrun.com</p><p>이 사이트는 쿠키와 방문 분석 도구를 쓰지 않아요.</p><p>Apple, Apple Watch, iPhone, iCloud, App Store, TestFlight는 Apple Inc.의 상표예요. SOOM은 Apple이 만들거나 보증한 앱이 아니에요.</p><p>© 2026 SOOM</p></div></footer>
 </body>
 </html>
