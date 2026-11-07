@@ -2,40 +2,502 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SOOM</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'sha256-y0uF6WhFT2aRU/aw1kZMcrNKXVVd+XjOgQRKNxiCYQU='; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<title>SOOM — Apple Watch 그대로, 기록을 훈련으로</title>
+<meta name="description" content="SOOM은 Apple Watch로 달린 기록을 iPhone 안에서 분석하는 러닝 앱이에요. 러닝 날씨, 코치 메모, 회복과 컨디션, 훈련 계획까지 한 앱에. 가입 없이 써요.">
+<meta property="og:title" content="SOOM — Apple Watch 그대로, 기록을 훈련으로">
+<meta property="og:description" content="Apple Watch 하나로, 기록부터 분석, 계획까지. 가입 없이, 분석은 내 iPhone 안에서.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SOOM">
+<meta property="og:url" content="https://soomrun.com/">
+<meta property="og:image" content="https://soomrun.com/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F6F2E8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://soomrun.com/">
+<link rel="icon" href="img/icon-180.png">
+<link rel="apple-touch-icon" href="img/icon-180.png">
+<!-- SOOM 공식 사이트 첫 화면(상호 SOOM).
+     바깥 요청·쿠키·방문 분석·광고 도구 없음(위 Content-Security-Policy가 이 사이트 밖으로 나가는 요청을 막는다). 글꼴은 이 사이트에 둔 Pretendard(SIL OFL, fonts/OFL.txt).
+     글을 고치면 공개 전에 tools/site_fonts.py를 다시 돌린다(새 글자가 글꼴에 들어가도록).
+     맨 아래 <script>를 한 글자라도 고치면 위 script-src의 sha256 값을 다시 계산해 바꾼다(안 바꾸면 스크립트가 막혀 움직임만 빠지고 내용은 그대로 보인다).
+     베타 설문 링크를 받으면: data-survey가 붙은 두 곳(첫 화면 단추, 베타 칸 단추)을 설문 링크 <a>로 바꾸고 글을 '베타 신청하기'로. -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"SOOM","url":"https://soomrun.com/","logo":"https://soomrun.com/img/icon-180.png","email":"contact@soomrun.com","sameAs":["https://www.youtube.com/@SOOMRUN","https://www.instagram.com/soom.42195/","https://www.threads.com/@soom.42195","https://x.com/SOOM_42195","https://www.tiktok.com/@soom.run"]}
+</script>
 <style>
-:root { --bg: #f6f2e9; --card: #fff; --ink: #1d1b18; --muted: #6f695f; --line: #e4ddcf; --accent: #c2541c; color-scheme: light dark; }
-@media (prefers-color-scheme: dark) { :root { --bg: #0d0d0e; --card: #1b1b1d; --ink: #f2f0ec; --muted: #a29d94; --line: #333336; --accent: #f0a23a; } }
-* { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; word-break: keep-all; }
-main { max-width: 720px; margin: 0 auto; padding: 32px 16px 64px; }
-h1 { font-size: 28px; line-height: 1.3; margin: 0 0 4px; }
-h2 { font-size: 19px; margin: 36px 0 8px; }
-p, ul { margin: 8px 0; }
-ul { padding-left: 20px; }
-a { color: var(--accent); }
-.date { color: var(--muted); font-size: 14px; }
-.box { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; margin: 16px 0; }
-.scroll { overflow-x: auto; }
-table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: 14px; }
-th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
-th { background: var(--card); }
-.promise { background: var(--card); background: color-mix(in srgb, var(--accent) 10%, var(--card)); border: 2px solid var(--accent); border-radius: 14px; padding: 18px 18px 14px; margin: 20px 0; }
-.promise h2 { font-size: 21px; line-height: 1.4; margin: 0 0 12px; }
-.promise p { margin: 10px 0; }
-.promise strong { display: block; }
-.promise .note { color: var(--muted); font-size: 14px; }
+@font-face{font-family:P;src:url(fonts/pretendard-500.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:P;src:url(fonts/pretendard-700.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:P;src:url(fonts/pretendard-900.woff2) format("woff2");font-weight:900;font-display:swap}
+:root{color-scheme:light dark;
+  --bg:#F6F2E8;--card:#FFFFFF;--line:#E0D8C8;--ink:#0B1B33;--muted:#5C6472;
+  --accent:#0B7A70;--on-accent:#FFFFFF;--mark:rgba(64,217,196,.45);--nav:rgba(246,242,232,.74);
+  --panel:#0D0E10;--p-card:#16171A;--p-line:#2A2B30;--p-ink:#F4F4F5;--p-muted:#A6A6AD;--mint:#40D9C4;
+  --r:#E5483B;--o:#EC7A2D;--a:#F2A91F;--y:#90AC3F;--g:#2DAE5F;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#000000;--card:#111214;--line:#232428;--ink:#FFFFFF;--muted:#A6A6AD;
+  --accent:#40D9C4;--on-accent:#03110F;--mark:transparent;--nav:rgba(12,12,13,.68);
+  --panel:#0E0F11;--p-card:#16171A}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--ink);font:500 16px/1.7 P,-apple-system,"Apple SD Gothic Neo",sans-serif;word-break:keep-all;overflow-wrap:anywhere;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+img{display:block;max-width:100%;height:auto}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+.skip{position:absolute;left:-9999px}.skip:focus{left:12px;top:12px;z-index:99;background:var(--card);padding:8px 14px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* 맨 위 안내(베타 동안) */
+.notice{background:var(--accent);color:var(--on-accent);font-size:14px;line-height:1.5;text-align:center;padding:9px 16px;text-wrap:balance}
+.notice b{font-weight:900}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:currentColor;margin-right:8px;vertical-align:2px;animation:blink 1.6s ease-in-out 3}
+@keyframes blink{50%{opacity:.25}}
+
+/* 떠 있는 메뉴 */
+.nav{position:sticky;top:10px;z-index:40;padding:0 12px;margin-top:10px}
+.nav .bar{max-width:1160px;margin:0 auto;display:flex;align-items:center;gap:4px;padding:6px 6px 6px 16px;border-radius:999px;background:var(--nav);-webkit-backdrop-filter:blur(16px) saturate(1.6);backdrop-filter:blur(16px) saturate(1.6);border:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:9px;font-weight:900;letter-spacing:.14em;font-size:18px;color:var(--ink);text-decoration:none;margin-right:auto}
+.logo svg{width:40px;height:16px;flex:none}
+.nav .links{display:none}
+.nav .links a{padding:8px 13px;border-radius:999px;color:var(--ink);text-decoration:none;font-weight:700;font-size:14px}
+.nav .links a:hover{background:color-mix(in srgb,var(--ink) 8%,transparent)}
+.pill{display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;text-decoration:none;color:var(--on-accent);background:var(--accent);padding:9px 16px;border-radius:999px;white-space:nowrap}
+
+/* 첫 화면 */
+.hero{padding:48px 0 0;overflow:hidden;text-align:center}
+.hero .emb{width:clamp(120px,22vw,200px);height:auto;margin:0 auto 6px;overflow:visible}
+.word{display:block;font-weight:900;font-size:clamp(64px,23vw,232px);letter-spacing:.12em;line-height:.9;margin:0 -.12em 0 0;white-space:nowrap}
+.word span{color:var(--ink)}
+@media (prefers-color-scheme:dark){.word span{background:linear-gradient(90deg,var(--c1),var(--c2));-webkit-background-clip:text;background-clip:text;color:transparent}}
+.slogan{font-weight:900;font-size:clamp(26px,4.6vw,48px);line-height:1.25;letter-spacing:-.025em;margin:26px 0 18px}
+.hl{background:linear-gradient(transparent 58%,var(--mark) 58%,var(--mark) 94%,transparent 94%)}
+@media (prefers-color-scheme:dark){.hl{background:linear-gradient(90deg,var(--r),var(--a) 55%,var(--g));-webkit-background-clip:text;background-clip:text;color:transparent}}
+.lead{color:var(--muted);font-size:clamp(16px,1.9vw,19px);max-width:34em;margin:0 auto 28px;text-wrap:balance}
+.cta{display:flex;flex-direction:column;align-items:center;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:17px;text-decoration:none;color:var(--on-accent);background:var(--accent);padding:15px 28px;border-radius:999px;border:0}
+.btn svg{width:18px;height:18px}
+.note{color:var(--muted);font-size:14px}
+.fan{position:relative;max-width:1000px;margin:52px auto 0;height:clamp(400px,64vw,700px)}
+.glow{position:absolute;inset:14% 0 0;filter:blur(56px);opacity:.42;pointer-events:none;
+  background:radial-gradient(closest-side at 24% 62%,var(--r),transparent),radial-gradient(closest-side at 50% 44%,var(--a),transparent),radial-gradient(closest-side at 76% 62%,var(--g),transparent)}
+@media (prefers-color-scheme:dark){.glow{opacity:.5}}
+.scr{position:absolute;bottom:0;border-radius:clamp(18px,3vw,36px);overflow:hidden;border:1px solid rgba(255,255,255,.14);background:#000;box-shadow:0 40px 90px -30px rgba(0,0,0,.55)}
+.fan .c{left:50%;width:clamp(196px,33vw,330px);transform:translateX(-50%);bottom:-14%;z-index:2}
+.fan .l,.fan .r{width:clamp(150px,26vw,262px);bottom:-26%}
+.fan .l{left:50%;transform:translateX(-122%) rotate(-7deg)}
+.fan .r{left:50%;transform:translateX(22%) rotate(7deg)}
+
+/* 흐르는 띠 */
+.marquee{overflow:hidden;border-block:1px solid var(--line);padding:17px 0;position:relative;z-index:3;background:var(--bg)}
+.track{display:flex;width:max-content;animation:mq 46s linear infinite}
+.track ul{display:flex;list-style:none;margin:0;padding:0}
+.track li{display:flex;align-items:center;font-weight:700;font-size:15px;white-space:nowrap;padding-right:30px}
+.track li::before{content:"";width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,var(--r),var(--g));margin-right:30px}
+@keyframes mq{to{transform:translateX(-50%)}}
+.marquee:hover .track,.marquee.paused .track{animation-play-state:paused}
+.mq-btn{display:none;position:absolute;right:10px;top:50%;transform:translateY(-50%);z-index:2;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer;place-items:center;padding:0}
+.js .mq-btn{display:grid}
+.mq-btn svg{width:14px;height:14px}.mq-btn path{fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}.mq-btn .pl{display:none;fill:currentColor;stroke-width:1.5}
+.marquee.paused .mq-btn .ps{display:none}.marquee.paused .mq-btn .pl{display:block}
+
+/* 공통 구역 */
+section{padding:clamp(76px,11vw,148px) 0}
+.label{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700;color:var(--muted);margin:0 0 18px}
+.label b{font:600 13px/1 var(--mono);color:var(--accent);letter-spacing:.04em}
+.label::after{content:"";flex:0 0 36px;height:1px;background:currentColor;opacity:.4}
+h2{font-weight:900;font-size:clamp(30px,5.4vw,60px);line-height:1.15;letter-spacing:-.03em;margin:0 0 16px;text-wrap:balance}
+.sub{color:var(--muted);font-size:clamp(16px,1.8vw,19px);max-width:36em;margin:0;text-wrap:pretty}
+.src{font-size:12.5px;color:inherit;opacity:.8}
+
+/* 01 하루의 흐름 (어두운 판) */
+.show{background:var(--panel);color:var(--p-ink);border-radius:clamp(26px,4vw,48px);margin:0 10px}
+.show .label{color:var(--p-muted)}.show .label b{color:var(--mint)}
+.show .sub{color:var(--p-muted)}
+.steps{list-style:none;margin:40px -20px 0;padding:0 20px 6px;display:grid;grid-auto-flow:column;grid-auto-columns:min(84%,340px);gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.steps::-webkit-scrollbar{display:none}
+.step{scroll-snap-align:center;background:var(--p-card);border:1px solid var(--p-line);border-radius:26px;padding:22px 20px 0;overflow:hidden;display:flex;flex-direction:column}
+.when{font:600 13px/1.4 var(--mono);color:var(--mint);letter-spacing:.03em;margin:0}
+.step h3{font-weight:900;font-size:22px;line-height:1.3;margin:8px 0;letter-spacing:-.01em}
+.step p{color:var(--p-muted);font-size:15px;line-height:1.65;margin:0}
+.step .shot{margin-top:auto;padding-top:20px}
+.step .shot div{aspect-ratio:3/4;overflow:hidden;border-radius:20px 20px 0 0;border:1px solid var(--p-line);border-bottom:0;background:#000}
+.hint{color:var(--p-muted);font-size:13px;margin:12px 0 0}
+.stage{display:none}
+
+/* 02 그리고 매일 */
+.bento{display:grid;gap:14px;margin-top:44px;grid-template-columns:1fr}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:24px 22px 0;overflow:hidden;display:flex;flex-direction:column}
+.tile h3{font-weight:900;font-size:20px;line-height:1.35;margin:0 0 6px;letter-spacing:-.01em}
+.tile p{color:var(--muted);font-size:15px;line-height:1.62;margin:0}
+.tile .shot{margin-top:auto;padding-top:22px}
+.tile .shot div{aspect-ratio:4/3;overflow:hidden;border-radius:18px 18px 0 0;border:1px solid var(--line);border-bottom:0;background:#000}
+.tile.wide .shot div{aspect-ratio:auto;border:0;border-radius:24px;background:none;margin-bottom:24px;max-width:440px}
+.tile.txt{padding-bottom:24px}
+.tile .big{font:900 clamp(32px,4vw,42px)/1.15 P,sans-serif;letter-spacing:-.02em;margin:auto 0 0;padding-top:28px;color:var(--ink)}
+.tile .big small{display:block;font:600 12.5px/1.5 var(--mono);color:var(--muted);letter-spacing:0;margin-top:8px}
+.tile .big .to{color:var(--accent)}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:auto;padding-top:28px}
+.week span{aspect-ratio:1;border-radius:12px;border:1px solid var(--line);display:grid;place-items:center;font-weight:700;font-size:13px;color:var(--muted);position:relative}
+.week span.on{border-color:var(--accent);color:var(--ink)}
+.week span.on::after{content:"";position:absolute;bottom:18%;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+
+/* 03 개인정보 */
+.rows{margin-top:48px;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:auto 1fr;gap:6px 22px;padding:28px 0;border-bottom:1px solid var(--line)}
+.row .n{font:600 14px/1 var(--mono);color:var(--accent);padding-top:12px}
+.row strong{font-weight:900;font-size:clamp(23px,3.2vw,36px);line-height:1.25;letter-spacing:-.02em}
+.row p{grid-column:2;margin:0;color:var(--muted);max-width:42em}
+.fine{color:var(--muted);font-size:14px;line-height:1.7;margin:28px 0 0;max-width:62em}
+.more{display:inline-flex;align-items:center;gap:6px;font-weight:700;text-decoration:none;margin-top:20px}
+
+/* 04 만든 이유 */
+.pairs{margin-top:48px;display:grid;gap:14px}
+.pairs .head{display:none}
+.pair{display:grid;border:1px solid var(--line);border-radius:26px;overflow:hidden;background:var(--card)}
+.pair>div{padding:22px 22px 24px}
+.pair b{display:block;font-weight:900;font-size:19px;line-height:1.4;margin-bottom:4px}
+.pair span{color:var(--muted);font-size:15px}
+.pair .k{font:600 12px/1 var(--mono);color:var(--muted);display:block;margin-bottom:12px;letter-spacing:.03em}
+.pair .after{background:color-mix(in srgb,var(--accent) 9%,var(--card));border-top:1px dashed var(--line)}
+.pair .after .k{color:var(--accent)}
+.name{margin-top:clamp(64px,9vw,120px);display:grid;gap:24px;align-items:center;text-align:center}
+.name svg{width:min(560px,92%);height:auto;margin:0 auto;overflow:visible}
+.name h3{font-weight:900;font-size:clamp(28px,4.4vw,48px);letter-spacing:-.02em;line-height:1.2;margin:0}
+.name p{color:var(--muted);margin:10px auto 0;max-width:30em}
+.legend{display:flex;justify-content:center;gap:18px;font-size:13px;color:var(--muted);margin-top:6px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+
+/* 05 베타 */
+.beta{position:relative;overflow:hidden;border-radius:clamp(28px,4vw,48px);background:var(--panel);color:var(--p-ink);padding:clamp(40px,6vw,84px) clamp(22px,5vw,76px)}
+.beta::before{content:"";position:absolute;width:560px;height:560px;right:-200px;top:-260px;border-radius:50%;filter:blur(70px);opacity:.38;background:conic-gradient(from 200deg,var(--r),var(--a),var(--g),var(--mint),var(--r));pointer-events:none}
+.beta>*{position:relative}
+.beta .label{color:var(--p-muted)}.beta .label b{color:var(--mint)}
+.beta .sub{color:var(--p-muted)}
+.beta ul{margin:26px 0 30px;padding:0;list-style:none;display:grid;gap:12px;max-width:52em}
+.beta li{padding-left:28px;position:relative;color:var(--p-ink)}
+.beta li::before{content:"";position:absolute;left:4px;top:.62em;width:10px;height:10px;border-radius:50%;border:2px solid var(--mint)}
+.btn.off{background:transparent;color:var(--mint);border:1.5px solid var(--mint);cursor:default}
+.beta .fine{color:var(--p-muted)}
+.beta .fine a{color:var(--mint)}
+
+/* 06 질문 */
+.faq{margin-top:12px;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0;font-weight:700;font-size:clamp(17px,2vw,20px);line-height:1.45}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";flex:none;font-weight:500;font-size:28px;line-height:1;color:var(--accent);transition:transform .25s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{margin:0 0 24px;color:var(--muted);max-width:46em}
+
+/* 07 운영 정보 */
+.about{display:grid;gap:14px;margin-top:40px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:26px 24px}
+.box h3{font-weight:900;font-size:19px;margin:0}
+.box dl{display:grid;grid-template-columns:auto 1fr;gap:10px 20px;margin:18px 0 0}
+.box dt{color:var(--muted);font-size:14px;padding-top:2px}
+.box dd{margin:0;font-weight:700}
+.box p{color:var(--muted);margin:14px 0 0}
+.box .links{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:16px;font-weight:700}
+
+/* 아래 */
+footer{border-top:1px solid var(--line);padding:36px 0 56px;font-size:14px;color:var(--muted)}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 20px;margin-bottom:14px}
+footer nav a{color:var(--ink);text-decoration:none;font-weight:700}
+footer p{margin:6px 0}
+.copy{margin-top:18px;font-weight:700;color:var(--ink)}
+
+/* 움직임: 스크롤하면 떠오름(자바스크립트가 있을 때만 숨김) */
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+.draw path{stroke-dasharray:1;stroke-dashoffset:0}
+.hero .emb path{stroke-dasharray:1;animation:draw 1.8s .2s cubic-bezier(.6,0,.2,1) both}
+.hero .emb circle{animation:pop .5s both}.hero .emb .end{animation-delay:1.8s}
+@keyframes draw{from{stroke-dashoffset:1}}
+@keyframes pop{from{opacity:0;transform:scale(.3)}}
+.emb circle{transform-box:fill-box;transform-origin:center}
+.js .name .draw path{stroke-dashoffset:1;transition:stroke-dashoffset 2.4s cubic-bezier(.6,0,.2,1)}
+.js .name .draw circle{opacity:0;transition:opacity .5s}
+.js .name.in .draw path{stroke-dashoffset:0}
+.js .name.in .draw circle{opacity:1}.js .name.in .draw .end{transition-delay:2.2s}
+
+@media (min-width:700px){
+  .bento{grid-template-columns:1fr 1fr}
+  .tile.wide,.tile.cal{grid-column:span 2}
+  .about{grid-template-columns:1fr 1fr}
+  .pair{grid-template-columns:1fr 1fr}
+  .pair .after{border-top:0;border-left:1px dashed var(--line)}
+  .cta{flex-direction:row;justify-content:center;gap:18px}
+}
+@media (min-width:880px){.nav .links{display:flex}}
+@media (min-width:1000px){
+  .bento{grid-template-columns:repeat(3,1fr)}
+  .tile.cal{grid-column:auto}
+  .row{grid-template-columns:90px 1fr 1.15fr;align-items:baseline}
+  .row p{grid-column:auto}
+  .faqw{display:grid;grid-template-columns:1fr 1.7fr;gap:72px;align-items:start}
+  .faqw .faq{margin-top:0}
+  .name{grid-template-columns:1.1fr 1fr;text-align:left}
+  .name p{margin-left:0}.legend{justify-content:flex-start}
+  /* 하루의 흐름: 왼쪽 화면이 붙어 있고 오른쪽 글을 내리면 화면이 바뀜 */
+  .js .flow{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;margin-top:40px}
+  .js .stage{display:block;position:sticky;top:96px;height:min(76vh,720px)}
+  .js .stage .scr{left:50%;top:0;bottom:auto;height:100%;width:auto;aspect-ratio:1206/2622;opacity:0;transform:translateX(-50%) translateY(18px) scale(.97);transition:opacity .55s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+  .js .stage .scr img{height:100%;width:auto}
+  .js .stage .scr.on{opacity:1;transform:translateX(-50%)}
+  .js .stage .glow{inset:8% -10%;opacity:.28}
+  .js .steps{display:block;overflow:visible;margin:0;padding:0}
+  .js .step{background:none;border:0;border-left:2px solid var(--p-line);border-radius:0;padding:0 0 0 30px;min-height:min(70vh,640px);justify-content:center;opacity:.55;transition:opacity .45s,border-color .45s}
+  .js .step.on{opacity:1;border-left-color:var(--mint)}
+  .js .step h3{font-size:clamp(30px,3.2vw,42px);margin:12px 0}
+  .js .step p{font-size:18px;max-width:24em}
+  .js .step .shot,.js .hint{display:none}
+}
+@media print{.js .rv{opacity:1;transform:none}.nav,.notice,.mq-btn{display:none}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .track{animation:none;flex-wrap:wrap;width:auto;justify-content:center}.track ul+ul{display:none}.track ul{flex-wrap:wrap;justify-content:center;row-gap:8px}
+  .dot,.hero .emb path,.hero .emb circle{animation:none}.mq-btn{display:none!important}
+  .js .rv{opacity:1;transform:none;transition:none}
+  .js .name .draw path{stroke-dashoffset:0;transition:none}.js .name .draw circle{opacity:1;transition:none}
+  .js .stage .scr{transition:none}
+}
 </style>
 </head>
 <body>
-<main>
-<h1>SOOM</h1>
-<p class="date">건강 앱의 러닝 기록을 분석하는 iPhone 앱</p>
-<ul>
-<li><a href="support.html">지원</a></li>
-<li><a href="privacy.html">개인정보처리방침</a></li>
-</ul>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <linearGradient id="eg" x1="0" x2="1"><stop offset="0" stop-color="#E5483B"/><stop offset=".5" stop-color="#F2A91F"/><stop offset="1" stop-color="#2DAE5F"/></linearGradient>
+  <symbol id="emblem" viewBox="0 0 100 40" overflow="visible"><path d="M8 30 C14 6,20 6,28 26 S40 34,48 16 S62 22,70 20 L92 18" fill="none" stroke="url(#eg)" stroke-width="6.5" stroke-linecap="round"/><circle cx="8" cy="30" r="5" fill="#fff" stroke="#E5483B" stroke-width="3"/><circle cx="92" cy="18" r="6" fill="#2DAE5F"/></symbol>
+</defs></svg>
+
+<div class="notice" role="note"><span class="dot" aria-hidden="true"></span><b>SOOM은 정식 출시 전이에요. 11월 16일부터 베타 테스터를 모집해요.</b> App Store에는 아직 없어요.</div>
+
+<header class="nav">
+  <div class="bar">
+    <a class="logo" href="./" aria-label="SOOM 처음으로"><svg aria-hidden="true"><use href="#emblem"/></svg>SOOM</a>
+    <nav class="links" aria-label="이 페이지"><a href="#features">기능</a><a href="#privacy">개인정보</a><a href="#story">만든 이유</a><a href="#faq">질문</a></nav>
+    <a class="pill" href="#beta">베타 신청</a>
+  </div>
+</header>
+
+<main id="main">
+<div class="hero">
+  <div class="wrap">
+    <h1>
+      <svg class="emb" viewBox="0 0 100 40" aria-hidden="true"><path pathLength="1" d="M8 30 C14 6,20 6,28 26 S40 34,48 16 S62 22,70 20 L92 18" fill="none" stroke="url(#eg)" stroke-width="6.5" stroke-linecap="round"/><circle cx="8" cy="30" r="5" fill="#fff" stroke="#E5483B" stroke-width="3"/><circle class="end" cx="92" cy="18" r="6" fill="#2DAE5F"/></svg>
+      <span class="word" role="img" aria-label="SOOM"><span style="--c1:#E5483B;--c2:#EC7A2D">S</span><span style="--c1:#EC7A2D;--c2:#F2A91F">O</span><span style="--c1:#F2A91F;--c2:#90AC3F">O</span><span style="--c1:#90AC3F;--c2:#2DAE5F">M</span></span>
+      <span class="sr">러닝 기록 분석 앱</span>
+    </h1>
+    <p class="slogan">Apple Watch 그대로,<br><span class="hl">기록을 훈련으로</span></p>
+    <p class="lead">Apple Watch로 달린 기록을 건강 앱에서 읽어 와 iPhone 안에서 분석하고, 오늘 컨디션과 회복 시간, 이번 주 훈련 계획까지 알려 줘요. 가입 없이 써요.</p>
+    <div class="cta">
+      <a class="btn" data-survey href="#beta">베타 테스트 알아보기 <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10h10m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <span class="note">신청은 11월 16일부터 · 약 2분</span>
+    </div>
+  </div>
+  <div class="fan" aria-label="SOOM 앱 화면 세 장(예시 데이터)" role="group">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="scr l"><img src="img/s-weather.jpg" width="600" height="1304" alt="러닝 날씨 화면. 지금 16도 구름 많음, 달리기 좋은 시간 오후 7~9시, 시간별 예보."></div>
+    <div class="scr c"><img src="img/s-today.jpg" width="600" height="1304" alt="오늘 화면. 최근 러닝 8.29km와 코치 한 줄 평, 운동 시간과 페이스, 회복 시간과 컨디션."></div>
+    <div class="scr r"><img src="img/s-growth.jpg" width="600" height="1304" alt="성장 화면. 러닝 VO2max 48.6과 6개월 추이 그래프."></div>
+  </div>
+</div>
+
+<div class="marquee">
+  <button class="mq-btn" type="button" aria-pressed="false" aria-label="흐르는 띠 멈추기"><svg viewBox="0 0 20 20" aria-hidden="true"><path class="ps" d="M7 5v10M13 5v10"/><path class="pl" d="M7 5l8 5-8 5z"/></svg></button>
+  <div class="track">
+    <ul aria-label="SOOM 주요 기능"><li>가입 없음</li><li>광고 없음</li><li>분석은 iPhone 안에서</li><li>러닝 날씨</li><li>코치 메모</li><li>같은 코스 비교</li><li>회복 시간</li><li>컨디션</li><li>내 목표에 맞춘 계획</li><li>러닝 VO2max</li><li>레이스 예측</li><li>러닝화 거리</li><li>기록 카드</li><li>위젯</li></ul>
+    <ul aria-hidden="true"><li>가입 없음</li><li>광고 없음</li><li>분석은 iPhone 안에서</li><li>러닝 날씨</li><li>코치 메모</li><li>같은 코스 비교</li><li>회복 시간</li><li>컨디션</li><li>내 목표에 맞춘 계획</li><li>러닝 VO2max</li><li>레이스 예측</li><li>러닝화 거리</li><li>기록 카드</li><li>위젯</li></ul>
+  </div>
+</div>
+
+<section id="features" aria-labelledby="h-flow" style="padding-bottom:0">
+ <div class="show" style="padding:clamp(56px,8vw,112px) 0">
+  <div class="wrap">
+    <p class="label rv"><b>01</b>하루의 흐름</p>
+    <h2 id="h-flow" class="rv">달리기 전부터 한 달 뒤까지,<br>앱 하나에</h2>
+    <p class="sub rv">건강 앱에 쌓인 러닝 기록을 SOOM이 읽어 와서 iPhone 안에서 분석해요.</p>
+    <div class="flow">
+      <div class="stage" aria-hidden="true">
+        <div class="glow"></div>
+        <div class="scr on"><img src="img/s-outfit.jpg" width="600" height="1304" alt="" loading="lazy"></div>
+        <div class="scr"><img src="img/s-run.jpg" width="600" height="1304" alt="" loading="lazy"></div>
+        <div class="scr"><img src="img/s-recovery.jpg" width="600" height="1304" alt="" loading="lazy"></div>
+        <div class="scr"><img src="img/s-plan.jpg" width="600" height="1304" alt="" loading="lazy"></div>
+        <div class="scr"><img src="img/s-records.jpg" width="600" height="1304" alt="" loading="lazy"></div>
+      </div>
+      <ol class="steps">
+        <li class="step on"><p class="when">01 · 달리기 전</p><h3>러닝 날씨와 복장</h3><p>달리기 좋은 시간과 그 시간에 맞는 복장을 알려 줘요.</p><p class="src">날씨 자료: 기상청, 한국환경공단 에어코리아</p>
+          <div class="shot"><div><img src="img/s-outfit.jpg" width="600" height="1304" loading="lazy" alt="러닝 날씨 화면. 시간별 예보와 오전 6시에 맞춘 복장 추천, 이번 주 추천 훈련."></div></div></li>
+        <li class="step"><p class="when">02 · 달린 뒤</p><h3>코치 메모와 같은 코스</h3><p>숫자를 말로 풀어 주고, 같은 코스는 알아서 묶어 지난번과 비교해요.</p>
+          <div class="shot"><div><img src="img/s-run.jpg" width="600" height="1304" loading="lazy" alt="러닝 기록 화면. 코치 메모와 같은 코스 비교."></div></div></li>
+        <li class="step"><p class="when">03 · 다음 날</p><h3>회복과 컨디션</h3><p>회복 시간은 지난 운동의 강도로, 컨디션은 HRV, 안정 심박, 수면으로 어림해요.</p>
+          <div class="shot"><div><img src="img/s-recovery.jpg" width="600" height="1304" loading="lazy" alt="회복 화면. 회복 시간 0시간, 컨디션 99점, 최근 30일 컨디션 그래프."></div></div></li>
+        <li class="step"><p class="when">04 · 이번 주</p><h3>대회가 없어도, 내 목표에 맞춘 계획</h3><p>목표 거리만 넣어도 이번 주 추천 계획과 월간 계획표가 나와요.</p>
+          <div class="shot"><div><img src="img/s-plan.jpg" width="600" height="1304" loading="lazy" alt="훈련 화면. 훈련 상태, 이번 주 추천 훈련 계획, 월간 계획표."></div></div></li>
+        <li class="step"><p class="when">05 · 한 달 뒤</p><h3>쌓인 기록의 흐름</h3><p>러닝 VO2max 추이, 레이스 예측, 개인 기록을 모아 봐요.</p>
+          <div class="shot"><div><img src="img/s-records.jpg" width="600" height="1304" loading="lazy" alt="성장 화면. 400m부터 15km까지 개인 기록과 거리별 실력 균형."></div></div></li>
+      </ol>
+    </div>
+    <p class="hint">옆으로 밀어서 더 보기 →</p>
+  </div>
+ </div>
+</section>
+
+<section aria-labelledby="h-more">
+  <div class="wrap">
+    <p class="label rv"><b>02</b>그리고 매일</p>
+    <h2 id="h-more" class="rv">작지만 매일 손이 가는 기능</h2>
+    <p class="sub rv">러닝화 관리부터 기록 카드, 계산기까지 한 앱에 있어요.</p>
+    <div class="bento">
+      <article class="tile rv"><h3>러닝화마다 달린 거리</h3><p>신발별 거리를 알아서 나눠 쌓고, 교체 기준이 가까워지면 알려 줘요.</p><div class="shot"><div><img src="img/t-shoes.jpg" width="600" height="622" loading="lazy" alt="신발 화면. 데일리 러닝화 330km, 교체 기준까지 남은 거리."></div></div></article>
+      <article class="tile rv"><h3>기록 카드 만들기</h3><p>지도, 심박, 날씨를 넣고 빼서 카드로 저장해요. 지도는 출발·도착 근처만 가리거나 아예 숨길 수 있어요.</p><div class="shot"><div><img src="img/t-share.jpg" width="600" height="647" loading="lazy" alt="기록 공유 화면. 역치 러닝 10.25km 카드."></div></div></article>
+      <article class="tile rv"><h3>같은 코스 비교</h3><p>같은 길을 달린 기록을 모아 빨라지는 중인지 보여 줘요.</p><div class="shot"><div><img src="img/t-courses.jpg" width="600" height="622" loading="lazy" alt="기록 화면의 코스 목록. 코스마다 횟수와 최고 기록, 빨라지는 중 표시."></div></div></article>
+      <article class="tile rv"><h3>러닝 계산기</h3><p>거리, 시간, 페이스 중 두 가지를 넣으면 나머지를 알려 줘요. 트레드밀, 인터벌, 케이던스·보폭도 계산해요.</p><div class="shot"><div><img src="img/t-calc.jpg" width="600" height="622" loading="lazy" alt="러닝 계산기 화면. 10km 페이스 구하기."></div></div></article>
+      <article class="tile rv"><h3>AI에게 더 물어보기</h3><p>기록을 내가 쓰는 AI 서비스에 붙여 넣을 글로 만들어 줘요. 복사해서 보내는 건 내가 직접 해요.</p><div class="shot"><div><img src="img/t-ai.jpg" width="600" height="622" loading="lazy" alt="AI용 글 화면. 이 러닝의 기록을 정리한 글."></div></div></article>
+      <article class="tile txt rv"><h3>트레드밀 거리 고치기</h3><p>실내 달리기 거리가 기계와 다르면, 기계에 나온 거리를 넣어 페이스와 구간을 다시 계산해요.</p><p class="big">6.79 <span class="to">→ 7.00</span> km<small>예시: 기계에 나온 거리로 고치기</small></p></article>
+      <article class="tile wide rv"><h3>홈 화면 위젯</h3><p>앱을 열지 않아도 오늘 추천 훈련과 컨디션을 홈 화면에서 봐요.</p><div class="shot"><div><img src="img/t-widget.jpg" width="600" height="291" loading="lazy" alt="SOOM 위젯. 추천 훈련 이지런 13.6km, 컨디션 99."></div></div></article>
+      <article class="tile txt cal rv"><h3>iPhone 캘린더에 계획 넣기</h3><p>훈련 계획을 캘린더에 넣어 두고 다른 일정과 함께 봐요.</p><div class="week" aria-hidden="true"><span class="on">월</span><span>화</span><span class="on">수</span><span>목</span><span class="on">금</span><span>토</span><span class="on">일</span></div></article>
+    </div>
+  </div>
+</section>
+
+<section id="privacy" aria-labelledby="h-privacy" style="padding-top:0">
+  <div class="wrap">
+    <p class="label rv"><b>03</b>개인정보</p>
+    <h2 id="h-privacy" class="rv">SOOM은 가입 없이,<br>분석은 내 iPhone 안에서만</h2>
+    <p class="sub rv">건강 기록은 건강 앱에, 분석은 내 iPhone 안에서 해요.</p>
+    <div class="rows">
+      <div class="row rv"><span class="n">01</span><strong>수집하지 않아요</strong><p>SOOM 앱은 이용자의 건강 기록과 개인정보를 가져가지 않아요. 회원가입도, 이용자 정보를 저장하는 서버도 없어요.</p></div>
+      <div class="row rv"><span class="n">02</span><strong>활용할 수 없어요</strong><p>앱에 있는 건강 기록과 개인정보를 가져가지 않으니 개발자가 보거나, 분석하거나, 팔 수 없어요. 광고, 이용 분석, 추적 도구도 없어요.</p></div>
+      <div class="row rv"><span class="n">03</span><strong>건강 기록이 한꺼번에 샐 곳이 없어요</strong><p>개발자 쪽에 건강 기록을 모아 둔 곳이 없어서, 해킹으로 한꺼번에 새어 나갈 건강 기록도 없어요. 직접 보낸 문의 메일만 개발자 메일함에 남아요(정식 출시 전 베타 기간 예외는 아래 참고).</p></div>
+    </div>
+    <p class="fine">날씨를 켜면 지난 러닝의 달이나 시각이 날씨 중계기로(위치는 보내지 않아요), 동네 이름을 찾을 약 100m 단위 위치가 Apple로, 지도를 보면 지도 지역이 전달돼요. 심박, 수면, 경로 같은 건강 기록은 보내지 않아요. iCloud 백업을 켜 두면 신발, 계획표 같은 일반 자료는 백업에 포함돼요. 직접 보낸 문의 메일만 개발자 메일함에 남아요. 베타 기간에는 예외로, 신청 이메일 목록이 개발자의 Google 설문지·Gmail에 있고(늦어도 베타가 끝나고 7일 안에 지워요), 직접 보낸 설문 답·피드백과 TestFlight가 자동으로 보내는 충돌·사용 기록도 개발자에게 와요.</p>
+    <a class="more" href="privacy.html">개인정보처리방침 전문 보기 <span aria-hidden="true">→</span></a>
+  </div>
+</section>
+
+<section id="story" aria-labelledby="h-story" style="padding-top:0">
+  <div class="wrap">
+    <p class="label rv"><b>04</b>만든 이유</p>
+    <h2 id="h-story" class="rv">시계 2개를 번갈아 차던<br>러너가 만들었어요</h2>
+    <p class="sub rv">SOOM은 러너 한 명이 달리면서 늘 불편했던 네 가지에서 시작했어요.</p>
+    <div class="pairs">
+      <div class="pair rv"><div class="before"><span class="k">불편했던 것 1</span><b>기록만 쌓였어요</b><span>거리, 페이스, 심박은 있는데 다음엔 뭘 할지 몰랐어요.</span></div><div class="after"><span class="k">그래서 SOOM은</span><b>기록을 훈련으로</b><span>컨디션, 회복 시간, 내 목표와 상태에 맞춘 계획까지.</span></div></div>
+      <div class="pair rv"><div class="before"><span class="k">불편했던 것 2</span><b>달릴 때마다 시계를 바꿔 찼어요</b><span>평소엔 Apple Watch, 달릴 땐 러닝 시계.</span></div><div class="after"><span class="k">그래서 SOOM은</span><b>시계를 바꿔 차지 않아도</b><span>Apple Watch 기록 그대로 분석해요.</span></div></div>
+      <div class="pair rv"><div class="before"><span class="k">불편했던 것 3</span><b>앱 여러 개를 오갔어요</b><span>분석, 계획, 날씨, 러닝화 관리를 따로따로.</span></div><div class="after"><span class="k">그래서 SOOM은</span><b>한 앱에 다 모아</b><span>분석, 계획, 날씨, 러닝화 관리까지.</span></div></div>
+      <div class="pair rv"><div class="before"><span class="k">불편했던 것 4</span><b>개인정보를 맡기기가 꺼려졌어요</b><span>가입도 싫고, 건강·운동 기록이 외부 서버로 나간다는 게.</span></div><div class="after"><span class="k">그래서 SOOM은</span><b>가입 없이</b><span>분석은 내 iPhone 안에서만.</span></div></div>
+    </div>
+    <div class="name rv">
+      <svg class="draw" viewBox="0 0 100 40" aria-hidden="true"><path pathLength="1" d="M8 30 C14 6,20 6,28 26 S40 34,48 16 S62 22,70 20 L92 18" fill="none" stroke="url(#eg)" stroke-width="6" stroke-linecap="round"/><circle cx="8" cy="30" r="4.6" fill="#fff" stroke="#E5483B" stroke-width="2.8"/><circle class="end" cx="92" cy="18" r="5.6" fill="#2DAE5F"/></svg>
+      <div>
+        <h3>SOOM은 '숨'이에요</h3>
+        <p>엠블럼은 달리고 나서 숨이 고르게 가라앉는 길을 그렸어요. 출발의 빨강에서 주황을 지나, 숨이 차분해지는 초록으로.</p>
+        <p class="legend"><span><i style="background:#E5483B"></i>출발</span><span><i style="background:#2DAE5F"></i>숨이 차분해짐</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="beta" aria-labelledby="h-beta" style="padding-top:0">
+  <div class="wrap">
+    <div class="beta rv">
+      <p class="label"><b>05</b>베타 테스트</p>
+      <h2 id="h-beta">SOOM 베타 테스터를 모집해요</h2>
+      <p class="sub">정식 출시 전에 먼저 써 보고 의견을 들려주실 분을 찾아요.</p>
+      <ul>
+        <li>대한민국에서 달리는 만 19세 이상, iOS 17 이상 iPhone을 쓰는 분</li>
+        <li>iPhone과 Apple Watch로 일주일에 한 번 이상 달리는 분(평소엔 Apple Watch, 달릴 땐 다른 시계여도 괜찮아요)</li>
+        <li>선정되면 2주 동안 평소처럼 달리고, 짧은 설문에 3번 답해요(신청 2분 · 첫 주 5분 · 마지막 10분)</li>
+        <li>베타 기간에는 모든 기능을 써 볼 수 있어요</li>
+        <li>신청 때 연락처는 이메일 하나만 받아요(이름·전화번호는 받지 않아요). 성별, 연령대, 러닝 습관도 여쭤요. 이메일은 선정 결과와 베타 안내에만 쓰고, 늦어도 베타 테스트가 끝나고 7일 안에 모두 지워요</li>
+      </ul>
+      <span class="btn off" data-survey aria-disabled="true">11월 16일 신청 시작</span>
+      <p class="fine">11월 16일부터 2차 선정 전까지 언제든 신청할 수 있어요. 선정 결과는 메일로 알려요. 신청 시작과 선정 날짜는 SOOM 공식 SNS(<a href="https://www.instagram.com/soom.42195/">인스타그램</a>, <a href="https://www.youtube.com/@SOOMRUN">유튜브</a>, <a href="https://www.threads.com/@soom.42195">스레드</a>, <a href="https://x.com/SOOM_42195">X</a>, <a href="https://www.tiktok.com/@soom.run">틱톡</a>)에 알려요.</p>
+    </div>
+  </div>
+</section>
+
+<section id="faq" aria-labelledby="h-faq" style="padding-top:0">
+  <div class="wrap faqw">
+    <div>
+      <p class="label rv"><b>06</b>자주 묻는 질문</p>
+      <h2 id="h-faq" class="rv">궁금한 점을<br>모았어요</h2>
+      <p class="sub rv">더 궁금한 점은 <a href="mailto:contact@soomrun.com">contact@soomrun.com</a>으로 보내 주세요.</p>
+    </div>
+    <div class="faq">
+      <details><summary>언제 출시해요?</summary><p>정식 출시 날짜는 아직 정하지 않았어요. 먼저 베타 테스트로 다듬고, 날짜가 정해지면 SOOM 공식 SNS와 이 페이지에 알려요.</p></details>
+      <details><summary>가격은 얼마예요?</summary><p>내려받기는 무료예요. 무료 체험으로 모든 기능을 먼저 써 보고, 마음에 들면 한 번 결제해서 계속 쓰는 평생 이용권(구독이 아니에요)을 준비하고 있어요. 사지 않아도 기록 목록, 기본 수치, 자료 내보내기는 계속 쓸 수 있어요. 가격은 정식 출시 때 알려요.</p></details>
+      <details><summary>무엇이 있어야 쓸 수 있어요?</summary><p>iOS 17 이상 iPhone이 필요해요. SOOM은 건강 앱에 저장된 러닝 기록을 읽어서, Apple Watch로 달린 기록이 있으면 가장 자세하게 분석하고 없으면 볼 수 있는 분석 항목이 줄어요. Android 휴대폰은 지원하지 않아요.</p></details>
+      <details><summary>회원가입이나 로그인이 필요해요?</summary><p>아니요. 회원가입도 로그인도 없어요. 앱을 열고 건강 앱 읽기를 허용하면 바로 시작해요. 허용하기 전에 예시 기록으로 먼저 둘러볼 수도 있어요.</p></details>
+      <details><summary>휴대폰을 바꾸면 기록은 어떻게 돼요?</summary><p>러닝 기록 원본은 건강 앱에 있어서, 건강 앱 기록이 새 iPhone으로 옮겨지면 SOOM이 다시 읽어요. 신발, 계획표, 설정은 iCloud나 컴퓨터 백업을 켜 두면 백업에 같이 들어가요. 메모, 프로필 값, 트레드밀 거리는 설정 › 데이터 › 내 자료 옮기기에서 내가 정한 암호를 건 파일로 옮겨요.</p></details>
+      <details><summary>SOOM의 숫자는 얼마나 정확해요?</summary><p>SOOM의 수치는 공개된 연구를 바탕으로 훈련에 참고하는 추정치예요. SOOM은 의료기기가 아니며 병을 찾아내거나 진단하지 않아요.</p></details>
+      <details><summary>문의는 어디로 해요?</summary><p><a href="mailto:contact@soomrun.com">contact@soomrun.com</a>으로 보내 주세요. 자주 생기는 문제와 해결 방법은 <a href="support.html">지원 페이지</a>에 있어요.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="about" aria-labelledby="h-about" style="padding-top:0">
+  <div class="wrap">
+    <p class="label rv"><b>07</b>운영 정보</p>
+    <h2 id="h-about" class="rv">SOOM 운영 정보</h2>
+    <div class="about">
+      <div class="box rv">
+        <h3>운영</h3>
+        <dl>
+          <dt>상호</dt><dd>SOOM</dd>
+          <dt>서비스</dt><dd>러닝 기록 분석 iPhone 앱 SOOM</dd>
+          <dt>문의</dt><dd><a href="mailto:contact@soomrun.com">contact@soomrun.com</a></dd>
+          <dt>웹사이트</dt><dd>soomrun.com</dd>
+          <!-- 사업자등록 뒤 채움(정식 판매 전 필수, 전자상거래법 제13조 제1항): 대표자, 사업자등록번호, 사업장 주소, 전화번호, 통신판매업 신고번호, 사업자정보 확인 링크 -->
+        </dl>
+        <p class="links"><a href="support.html">지원</a><a href="privacy.html">개인정보처리방침</a></p>
+      </div>
+      <div class="box rv" lang="en">
+        <h3>About SOOM</h3>
+        <p>SOOM is a running analytics app for iPhone. It reads the runs you record with Apple Watch from the Health app and analyzes them on your iPhone: weather for your run, coach notes, recovery and daily condition, a training plan, and long-term progress. No sign-up, no ads, no tracking.</p>
+        <p>SOOM is preparing for a beta test in the Republic of Korea (applications open November 16, 2026) and is not yet available on the App Store.</p>
+        <p class="links"><a href="mailto:contact@soomrun.com">contact@soomrun.com</a><a href="privacy.html">Privacy Policy (Korean)</a><a href="support.html">Support (Korean)</a></p>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
+
+<footer>
+  <div class="wrap">
+    <nav aria-label="안내"><a href="support.html">지원</a><a href="privacy.html">개인정보처리방침</a><a href="mailto:contact@soomrun.com">문의 메일</a></nav>
+    <nav aria-label="SNS"><a href="https://www.youtube.com/@SOOMRUN">유튜브</a><a href="https://www.instagram.com/soom.42195/">인스타그램</a><a href="https://www.threads.com/@soom.42195">스레드</a><a href="https://x.com/SOOM_42195">X</a><a href="https://www.tiktok.com/@soom.run">틱톡</a></nav>
+    <p>화면 속 러닝 기록과 숫자는 예시 데이터예요(날씨 화면은 실제 기상청·에어코리아 자료).</p>
+    <p>SOOM의 수치는 공개된 연구를 바탕으로 한 추정치예요.</p>
+    <p>이 사이트는 쿠키와 방문 분석 도구를 쓰지 않아요.</p>
+    <p>Apple, Apple Watch, iPhone, iCloud, App Store, TestFlight는 Apple Inc.의 상표예요. SOOM은 Apple이 만들거나 보증한 앱이 아니에요.</p>
+    <p class="copy">© 2026 SOOM</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var d=document.documentElement;d.classList.add('js');
+  var io='IntersectionObserver' in window;
+  // 떠오르기
+  var rv=document.querySelectorAll('.rv');
+  if(!io){rv.forEach(function(e){e.classList.add('in')});}
+  else{var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');o.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});rv.forEach(function(e){o.observe(e)});}
+  // 흐르는 띠 멈추기/다시 흐르기
+  var mq=document.querySelector('.marquee'),mb=document.querySelector('.mq-btn');
+  if(mq&&mb){mb.addEventListener('click',function(){var p=mq.classList.toggle('paused');mb.setAttribute('aria-pressed',p?'true':'false');mb.setAttribute('aria-label',p?'흐르는 띠 다시 흐르게':'흐르는 띠 멈추기')});}
+  // 하루의 흐름: 가운데에 온 단계의 화면을 보여 줌
+  var steps=document.querySelectorAll('.step'),scr=document.querySelectorAll('.stage .scr');
+  if(io&&steps.length){var s=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var i=[].indexOf.call(steps,e.target);steps.forEach(function(x,k){x.classList.toggle('on',k===i)});scr.forEach(function(x,k){x.classList.toggle('on',k===i)})})},{rootMargin:'-45% 0px -45% 0px'});steps.forEach(function(e){s.observe(e)});}
+})();
+</script>
 </body>
 </html>
