@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'sha256-y0uF6WhFT2aRU/aw1kZMcrNKXVVd+XjOgQRKNxiCYQU='; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'sha256-fn5A2AKjyXaG33ZmNgXYxq2+fi5+G2hlteCzSirtLIU='; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <title>SOOM — Apple Watch 그대로, 기록을 훈련으로</title>
 <meta name="description" content="SOOM은 Apple Watch로 달린 기록을 iPhone 안에서 분석하는 러닝 앱이에요. 러닝 날씨, 코치 메모, 회복과 컨디션, 훈련 계획까지 한 앱에. 가입 없이 써요.">
@@ -184,6 +184,11 @@ h2{font-weight:900;font-size:clamp(30px,5.4vw,60px);line-height:1.15;letter-spac
 .beta li{padding-left:28px;position:relative;color:var(--p-ink)}
 .beta li::before{content:"";position:absolute;left:4px;top:.62em;width:10px;height:10px;border-radius:50%;border:2px solid var(--mint)}
 .btn.off{background:transparent;color:var(--mint);border:1.5px solid var(--mint);cursor:default}
+.beta .acts{display:flex;flex-wrap:wrap;align-items:center;gap:12px 14px}
+.btn.ghost{display:none;background:transparent;color:var(--mint);border:1.5px solid var(--mint);cursor:pointer;font-family:inherit}
+.js .btn.ghost{display:inline-flex}
+.beta .share-msg{margin:12px 0 0;font-size:14px;color:var(--mint);min-height:1.4em}
+.beta .share-msg:empty{margin:0;min-height:0}
 .beta .fine{color:var(--p-muted)}
 .beta .fine a{color:var(--mint)}
 
@@ -410,7 +415,11 @@ footer p{margin:6px 0}
         <li>베타 기간에는 모든 기능을 써 볼 수 있어요</li>
         <li>신청 때 연락처는 이메일 하나만 받아요(이름·전화번호는 받지 않아요). 성별, 연령대, 러닝 습관도 여쭤요. 이메일은 선정 결과와 베타 안내에만 쓰고, 늦어도 베타 테스트가 끝나고 7일 안에 모두 지워요</li>
       </ul>
-      <a class="btn" data-survey href="https://forms.gle/2g4RkLyaeam5awcr8">베타 테스터 신청하기</a>
+      <div class="acts">
+        <a class="btn" data-survey href="https://forms.gle/2g4RkLyaeam5awcr8">베타 테스터 신청하기</a>
+        <button type="button" class="btn ghost" data-share>같이 뛰는 친구에게 보내기</button>
+      </div>
+      <p class="share-msg" data-share-msg role="status" aria-live="polite"></p>
       <p class="fine">지금부터 2차 선정 전까지 언제든 신청할 수 있어요. 선정 결과는 메일로 알려요. 선정 날짜는 SOOM 공식 SNS(<a href="https://www.instagram.com/soom.42195/">인스타그램</a>, <a href="https://www.youtube.com/@SOOMRUN">유튜브</a>, <a href="https://www.threads.com/@soom.42195">스레드</a>, <a href="https://x.com/SOOM_42195">X</a>, <a href="https://www.tiktok.com/@soom.run">틱톡</a>)에 알려요.</p>
     </div>
   </div>
@@ -466,6 +475,14 @@ footer p{margin:6px 0}
   // 하루의 흐름: 가운데에 온 단계의 화면을 보여 줌
   var steps=document.querySelectorAll('.step'),scr=document.querySelectorAll('.stage .scr');
   if(io&&steps.length){var s=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var i=[].indexOf.call(steps,e.target);steps.forEach(function(x,k){x.classList.toggle('on',k===i)});scr.forEach(function(x,k){x.classList.toggle('on',k===i)})})},{rootMargin:'-45% 0px -45% 0px'});steps.forEach(function(e){s.observe(e)});}
+  // 친구에게 보내기: 휴대폰 공유 창, 없으면 주소 복사(바깥 요청·기록 없음)
+  var sb=document.querySelector('[data-share]'),sm=document.querySelector('[data-share-msg]'),su='https://soomrun.com/';
+  if(sb){sb.addEventListener('click',function(){
+    if(navigator.share){navigator.share({title:'SOOM 베타 테스터 모집',text:'SOOM 베타 테스터를 모집해요. Apple Watch로 달린다면 2분이면 신청할 수 있어요.',url:su}).catch(function(){});return;}
+    var say=function(t){if(sm)sm.textContent=t;};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(su).then(function(){say('주소를 복사했어요. 친구에게 붙여 넣어 보내 주세요.');},function(){say(su);});}
+    else{say(su);}
+  });}
 })();
 </script>
 </body>
